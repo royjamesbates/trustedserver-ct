@@ -1,28 +1,34 @@
 # Trusted Server CT Corporation Landing Page
 
-CT Corporation service landing page for Trusted Server (Roy Bates, SPS #1383), Plantation, FL. Email-first intake, no portal.
+CT Corporation service landing page for Trusted Server (Roy Bates, SPS #1383), Plantation FL. Email-first intake, no portal.
 
 ## Live URLs
 
 - Primary: https://trustedserver.us/ct
 - GitHub Pages: https://ct.trustedserversop.com (after DNS is pointed)
 
-## DNS setup (GoDaddy)
+## Publishing (GitHub Pages)
 
-1. In GoDaddy Domain Manager, open **trustedserversop.com** → Manage → DNS.
-2. Add a **CNAME** record:
-   - Host: `ct`
-   - Points to: `royjamesbates.github.io`
-   - TTL: 1 hour (or default)
-3. Save. DNS propagation takes a few minutes to a few hours.
-4. Verify: `https://ct.trustedserversop.com` should serve this page.
+1. Repo Settings > Pages > Source: Deploy from branch `main`, folder `/ (root)`.
+2. Pages will serve `index.html` automatically.
 
-## GitHub Pages
+## DNS (GoDaddy) — required for ct.trustedserversop.com
 
-This repo is published via GitHub Pages from the `main` branch. The `CNAME` file in the repo root tells Pages to serve the custom domain.
+In GoDaddy Domain Manager for trustedserversop.com, add these records:
 
-## Contact
+| Type | Name | Value |
+|------|------|-------|
+| A | ct | 185.199.108.153 |
+| A | ct | 185.199.109.153 |
+| A | ct | 185.199.110.153 |
+| A | ct | 185.199.111.153 |
 
-- Email: bates@trustedserver.us
-- Phone: 954-515-6450
-- SPS #1383, Broward County, FL
+- TTL: 1 hour (or default)
+- Do NOT add a CNAME for `ct` — GitHub Pages requires A records at the apex subdomain when using a custom domain on a subdomain.
+- After saving, DNS propagation takes 5 minutes to a few hours.
+- Verify: `nslookup ct.trustedserversop.com` should return the four 185.199.x.x addresses.
+
+## Notes
+
+- The page's canonical URL and structured data point to https://trustedserver.us/ct — update those in index.html if you want the .sop domain to be the canonical.
+- Contact: bates@trustedserver.us · 954-515-6450
